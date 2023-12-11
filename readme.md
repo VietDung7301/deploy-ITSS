@@ -1,22 +1,21 @@
-# NodeJs boilerplate
-## 1. Installation
+## Installation
 ### Yêu cầu
 Cài đặt nodeJs version v18+ (Nếu sử dụng node khác có thể xảy ra tình trạng không tương thích phiên bản)
+
+Cài đặt MySQL-server
 ### Các bước tiến hành
-#### Cài MongoDB
-Project này sử dụng mongoDB để lưu dữ liệu phía backend. Truy cập vào đường link [install mongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/) để xem cách cài đặt chi tiết (nếu dùng linux thì click vào nút "install on Linux" cũng có hướng dẫn chi tiết)
-#### Cài đặt server
-Chuyển đường dẫn về server, sau đó chạy lệnh instal như dưới đây:
+#### 1. Cài đặt server
 ```shell
 yarn install
 ```
-## 2. Init DB
-#### Chạy DB
+#### 2. Tạo database
+Tạo 1 database mysql mới. Database tên gì cũng được, nhưng phải trùng với `DB_NAME` trong file `.env`
+#### 2. Init DB
+Lệnh sau sẽ tạo ra các bảng trong database vừa tạo
 ```shell
 yarn db
 ```
-## 2. How to run
-#### Khởi động server
+#### 3. Khởi động server
 ```shell
 yarn run dev
 ```

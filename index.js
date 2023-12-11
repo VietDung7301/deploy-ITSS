@@ -5,7 +5,6 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 /**
- * 
  * Import các biến toàn cục
  */
 require("dotenv").config();
@@ -19,7 +18,7 @@ app.use(express.urlencoded({ extended: false, limit: '50mb', parameterLimit: 500
 /**
  * Import router dùng để bắt dữ liệu
  */
-router.use("", require('./modules/auth/route'));
+router.use("/api/v1", require('./modules/example/route'));
 
 
 app.use(router);
@@ -27,7 +26,6 @@ app.use(router);
 /**
  * Khởi động server
  */
-
 const port = process.env.PORT;
 server.listen(port, () => {
     console.log(`Server up and running on: ${port} !`)

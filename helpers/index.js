@@ -1,5 +1,5 @@
 module.exports = {
     Generator: require('./generator'),
-    Redis: require('./redis'),
-    JWT: require('./jwt')
+    JWT: require('./jwt'),
+    Mailer: require('./email')
 }

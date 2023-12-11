@@ -1,5 +1,5 @@
 const models = {
-    Client: require('./client'),
+    job: require('./job'),
 }
 
 module.exports = { 
