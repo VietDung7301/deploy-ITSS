@@ -4,8 +4,18 @@ require("dotenv").config();
 
 const initModels = (db, models) => {
     console.log('init model')
+    let model_list = {}
     for (const [key, value] of Object.entries(models)) {
-        db.define(value.modelConfig.name, value.modelConfig.attributes)
+        model_list[value.modelConfig.name] = db.define(value.modelConfig.name, value.modelConfig.attributes)
+    }
+    for (const [key, value] of Object.entries(models)) {
+        for (let ref of value.modelConfig.foreignKey || []) {
+            model_list[ref.table].hasMany(
+                model_list[value.modelConfig.name],
+                { foreignKey: ref.column }
+            );
+            model_list[value.modelConfig.name].belongsTo(model_list[ref.table]);
+        }
     }
     console.log('finish init')
 }
