@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: false, limit: '50mb', parameterLimit: 500
 /**
  * Import router dùng để bắt dữ liệu
  */
-router.use("/api/v1", require('./modules/example/route'));
+router.use("/api/v1", require('./modules/job/route'));
 
 
 app.use(router);
