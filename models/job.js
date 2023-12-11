@@ -28,7 +28,10 @@ const modelConfig = {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-    }
+    },
+    foreignKey: [
+        { table: 'company', column: 'company_id', key: 'id'},
+    ],
 }
 
 module.exports = { modelConfig }
