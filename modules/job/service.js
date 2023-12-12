@@ -1,4 +1,4 @@
-const { Job, Company } = require('../../models')
+const { job, company } = require('../../models')
 const { Op, Sequelize } = require("sequelize")
 const { toInt } = require('../../helpers/utils')
 
@@ -25,7 +25,7 @@ exports.getAllJob = async (name, salary_from, salary_to, distance_from, distance
                     name: {[Op.substring]: name}
                 },
                 {
-                    '$Company.name$': {[Op.substring]: name}
+                    '$company.name$': {[Op.substring]: name}
                 }
             ]
         }
@@ -48,7 +48,7 @@ exports.getAllJob = async (name, salary_from, salary_to, distance_from, distance
     if (work_localtion) {
         conditions['work_localtion'] = work_localtion
     }
-    let result = await Job(DB_CONNECTION).findAll({
+    let result = await job(DB_CONNECTION).findAll({
         attributes: [
             ['id', 'jod_id'],
             ['name', 'job_name'],
@@ -58,8 +58,7 @@ exports.getAllJob = async (name, salary_from, salary_to, distance_from, distance
         where: conditions,
         include: [
             {
-                model: Company(DB_CONNECTION),
-                as: 'company',
+                model: company(DB_CONNECTION),
                 attributes: ['id', 'name', 'image']
             }
         ]

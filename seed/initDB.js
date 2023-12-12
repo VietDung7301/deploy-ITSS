@@ -7,9 +7,7 @@ const initModels = (db, models) => {
     for (const [key, model] of Object.entries(models)) {
         if (!db.models[key] && key != 'create_associations') model(db) 
     }
-    db.models.Job.belongsTo(db.models.Company, {
-        as: 'company'
-    })
+    db.models.job.belongsTo(db.models.company)
     console.log('finish init')
 }
 

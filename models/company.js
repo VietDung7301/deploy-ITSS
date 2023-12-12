@@ -57,8 +57,10 @@ const CompanySchema = {
 }
 
 module.exports = (db) => {
-    if (!db.models.Company) {
-        return db.define('Company', CompanySchema)
+    if (!db.models.company) {
+        return db.define('company', CompanySchema, {
+            freezeTableName: true
+        })
     }
-    return db.models.Company
+    return db.models.company
 }

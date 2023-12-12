@@ -33,8 +33,10 @@ const JobSchema = {
 }
 
 module.exports = (db) => {
-    if (!db.models.Job) {
-        return db.define('Job', JobSchema)
+    if (!db.models.job) {
+        return db.define('job', JobSchema, {
+            freezeTableName: true
+        })
     }
-    return db.models.Job
+    return db.models.job
 }
