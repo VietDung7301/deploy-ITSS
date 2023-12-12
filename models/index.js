@@ -1,8 +1,4 @@
-const models = {
-    job: require('./job'),
-    company: require('./company')
-}
-
-module.exports = { 
-    models
+module.exports = {
+    Job: require('./job'),
+    Company: require('./company'),
 }
