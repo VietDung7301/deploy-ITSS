@@ -10,60 +10,7 @@ exports.getJobList = async(req, res) => {
             return
         }
 
-        const result = [
-            {
-                job_id: 5,
-                job_name: "Tester(QC)",
-                company: {
-                        id: 1,
-                        name: 'Sun*',
-                        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/FPT_Software_logo.svg/1200px-FPT_Software_logo.svg.png',
-                },        
-                distance: 0.8,
-                work_location: 'office',
-                skill_requirements: ['Tester', 'QA QC'],
-                salary: 1500000
-            },
-            {
-                job_id: 5,
-                job_name: "Tester(QC)",
-                company: {
-                        id: 1,
-                        name: 'Sun*',
-                        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/FPT_Software_logo.svg/1200px-FPT_Software_logo.svg.png',
-                },        
-                distance: 0.8,
-                work_location: 'office',
-                skill_requirements: ['Tester', 'QA QC'],
-                salary: 1500000
-            },
-            {
-                job_id: 5,
-                job_name: "Tester(QC)",
-                company: {
-                        id: 1,
-                        name: 'Sun*',
-                        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/FPT_Software_logo.svg/1200px-FPT_Software_logo.svg.png',
-                },        
-                distance: 0.8,
-                work_location: 'office',
-                skill_requirements: ['Tester', 'QA QC'],
-                salary: 1500000
-            },
-            {
-                job_id: 5,
-                job_name: "Tester(QC)",
-                company: {
-                        id: 1,
-                        name: 'Sun*',
-                        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/FPT_Software_logo.svg/1200px-FPT_Software_logo.svg.png',
-                },        
-                distance: 0.8,
-                work_location: 'office',
-                skill_requirements: ['Tester', 'QA QC'],
-                salary: 1500000
-            },
-        ]
+        const result = await service.getAllJob(name, salary_from, salary_to, distance_from, distance_to, type, work_localtion)
         res.status(200).json(result)
     } catch (err) {
         res.status(400).json({

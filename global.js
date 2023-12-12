@@ -3,22 +3,18 @@
  */
 
 const { Sequelize } = require('sequelize');
-const { models } = require('./models')
+const models = require('./models')
 
 const initModels = (db, models) => {
-    let model_list = {}
-    for (const [key, value] of Object.entries(models)) {
-        model_list[value.modelConfig.name] = db.define(value.modelConfig.name, value.modelConfig.attributes)
+    console.log('init model')
+    for (const [key, model] of Object.entries(models)) {
+        if (!db.models[key] && key != 'create_associations') model(db) 
     }
-    for (const [key, value] of Object.entries(models)) {
-        for (let ref of value.modelConfig.foreignKey || []) {
-            model_list[ref.table].hasMany(
-                model_list[value.modelConfig.name],
-                { foreignKey: ref.column }
-            );
-            model_list[value.modelConfig.name].belongsTo(model_list[ref.table]);
-        }
-    }
+    db.models.Company.hasMany(db.models.Job)
+    db.models.Job.belongsTo(db.models.Company, {
+        as: 'company'
+    })
+    console.log('finish init')
 }
 
 module.exports = async (server) => {
