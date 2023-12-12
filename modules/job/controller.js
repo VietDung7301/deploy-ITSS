@@ -13,6 +13,7 @@ exports.getJobList = async(req, res) => {
         const result = await service.getAllJob(name, salary_from, salary_to, distance_from, distance_to, type, work_localtion)
         res.status(200).json(result)
     } catch (err) {
+        console.log('error', err)
         res.status(400).json({
             messages: 'Something went wrong!',
             content: err.messages
