@@ -10,7 +10,6 @@ const initModels = (db, models) => {
     for (const [key, model] of Object.entries(models)) {
         if (!db.models[key] && key != 'create_associations') model(db) 
     }
-    db.models.Company.hasMany(db.models.Job)
     db.models.Job.belongsTo(db.models.Company, {
         as: 'company'
     })
