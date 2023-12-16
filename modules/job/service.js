@@ -65,3 +65,29 @@ exports.getAllJob = async (name, salary_from, salary_to, distance_from, distance
     })
     return result
 }
+
+/**
+ * Lấy thông tin chi tiết 1 công việc theo id
+ * @param {*} id 
+ */
+exports.getJobById = async (id) => {
+    id = toInt(id)
+    let result = await job(DB_CONNECTION).findOne({
+        where: {
+            id: id
+        },
+        attributes: [
+            ['id', 'jod_id'],
+            ['name', 'job_name'],
+            [Sequelize.col('company.distance'), 'distance'],
+            'work_location', 'skill_requirements', 'salary', 'type', 'description'
+        ],
+        include: [
+            {
+                model: company(DB_CONNECTION),
+                attributes: ['id', 'name', 'image', 'address', 'type', 'scale', 'nation', 'time_work', 'is_overtime']
+            }
+        ]
+    })
+    return result
+}
