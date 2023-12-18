@@ -9,6 +9,7 @@ const UserSchema = {
     username: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
     },
     full_name: {
         type: DataTypes.STRING,
