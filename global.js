@@ -11,6 +11,8 @@ const initModels = (db, models) => {
         if (!db.models[key] && key != 'create_associations') model(db) 
     }
     db.models.job.belongsTo(db.models.company)
+    db.models.apply_job.belongsTo(db.models.job)
+    db.models.apply_job.belongsTo(db.models.user)
     console.log('finish init')
 }
 
