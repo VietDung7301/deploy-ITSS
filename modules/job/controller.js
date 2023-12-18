@@ -27,7 +27,7 @@ exports.getJobById = async(req, res) => {
 
         const result = await service.getJobById(job_id)
         if (result === null) {
-            res.status(404).json({
+            res.status(400).json({
                 messages: 'No job found with this id'
             })
             return
