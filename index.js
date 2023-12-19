@@ -15,13 +15,13 @@ require("./global")(server);
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb', parameterLimit: 50000 }));
 app.use(bodyParser.json({ limit: '50mb' }));
-app.use(upload.array()); 
 
 /**
  * Import router dùng để bắt dữ liệu
  */
 router.use("/api/v1", require('./modules/job/route'));
 router.use("/api/v1", require('./modules/auth/route'));
+router.use("/api/v1", require('./modules/user/route'));
 
 
 app.use(router);

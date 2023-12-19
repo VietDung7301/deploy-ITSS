@@ -1,6 +1,7 @@
-const { job, company } = require('../../models')
-const { Op, Sequelize } = require("sequelize")
-const { toInt } = require('../../helpers/utils')
+const { job, company, user } = require('../../models');
+const { Op, Sequelize } = require("sequelize");
+const { toInt } = require('../../helpers/utils');
+const { upload_file_to_dropbox } = require('../../helpers');
 
 /**
  * Lấy danh sách công việc dựa theo các tiêu chí bên dưới
@@ -90,4 +91,27 @@ exports.getJobById = async (id) => {
         ]
     })
     return result
+}
+
+/**
+ * Thêm thông tin apply job của user
+ * @param {int} job_id 
+ * @param {int} user_id 
+ * @param {string} name 
+ * @param {boolean} use_current_cv 
+ * @param {string} intro_letter 
+ * @param {File} file 
+ */
+exports.applyJob = async (job_id, user_id, name, use_current_cv, intro_letter, file) => {
+    if (use_current_cv == 'no') {
+        let user_cv = await upload_file_to_dropbox(file.path, file.filename, user_id);
+        await user(DB_CONNECTION).update(
+            {
+                cv_link: user_cv.path,
+                cv_name: file.originalname
+            },{
+                where: {id: user_id},
+            });
+    }
+    return true;
 }

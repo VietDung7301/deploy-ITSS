@@ -17,6 +17,8 @@ const initModels = (db, models) => {
 }
 
 module.exports = async (server) => {
+    global.DROPBOX_TOKEN = process.env.DROPBOX_TOKEN;
+
     let connectOptions = {
         useNewUrlParser: true,
         useUnifiedTopology: true,

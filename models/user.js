@@ -71,6 +71,10 @@ const UserSchema = {
         type: DataTypes.STRING,
         allowNull: true,
     },
+    cv_name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    }
 }
 
 module.exports = (db) => {
