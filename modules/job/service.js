@@ -1,4 +1,4 @@
-const { job, company, user } = require('../../models');
+const { job, company, user, apply_job } = require('../../models');
 const { Op, Sequelize } = require("sequelize");
 const { toInt } = require('../../helpers/utils');
 const { upload_file_to_dropbox } = require('../../helpers');
@@ -108,10 +108,16 @@ exports.applyJob = async (job_id, user_id, name, use_current_cv, intro_letter, f
         await user(DB_CONNECTION).update(
             {
                 cv_link: user_cv.path,
-                cv_name: file.originalname
+                cv_name: file.originalname,
+                full_name: name
             },{
                 where: {id: user_id},
             });
     }
+    await apply_job(DB_CONNECTION).create({
+        intro_letter: intro_letter,
+        job_id: job_id,
+        user_id: user_id
+    });
     return true;
 }

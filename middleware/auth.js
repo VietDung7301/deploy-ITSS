@@ -8,7 +8,6 @@ exports.auth = (req, res, next) => {
 		token = token.split(' ')[1];
 		jwt.verify(token, jwtSecret, (err, decodedToken) => {
 			if (err) {
-				console.log('error', err)
 				return res.status(400).json({ message: "Not authorized" });
 			} else {
 				if (!decodedToken.id) {
