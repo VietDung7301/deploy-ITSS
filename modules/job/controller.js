@@ -52,9 +52,9 @@ exports.applyJob = async (req, res) => {
         }
         const user_id = req.user.id;
         if (!name || use_current_cv === undefined || use_current_cv == null
-            || use_current_cv == false && !file) {
+            || use_current_cv == 'no' && !file) {
                 return res.status(400).json({
-                    message: 'Invalid parameter(s)~'
+                    message: 'Invalid parameter(s)!'
                 })
             }
         

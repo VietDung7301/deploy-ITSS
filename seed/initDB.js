@@ -3,14 +3,17 @@ const models = require('../models')
 require("dotenv").config();
 
 const initModels = (db, models) => {
-    console.log('init model')
     for (const [key, model] of Object.entries(models)) {
         if (!db.models[key] && key != 'create_associations') model(db) 
     }
-    db.models.job.belongsTo(db.models.company)
-    db.models.apply_job.belongsTo(db.models.job)
-    db.models.apply_job.belongsTo(db.models.user)
-    console.log('finish init')
+    db.models.job.belongsTo(db.models.company, {foreignKey: 'company_id'})
+    db.models.company.hasMany(db.models.job, {foreignKey: 'company_id'})
+
+    db.models.apply_job.belongsTo(db.models.job, {foreignKey: 'job_id'})
+    db.models.job.hasMany(db.models.apply_job, {foreignKey: 'job_id'})
+
+    db.models.apply_job.belongsTo(db.models.user, {foreignKey: 'user_id'})
+    db.models.user.hasMany(db.models.apply_job, {foreignKey: 'user_id'})
 }
 
 const initDB = async () => {
