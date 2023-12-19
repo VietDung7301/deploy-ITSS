@@ -31,7 +31,7 @@ exports.login = async (req, res) => {
 	} catch (err) {
 		console.log('error', err)
 		res.status(400).json({
-			messages: 'Something went wrong!',
+			message: 'Something went wrong!',
 			content: err.messages
 		})
 	}
