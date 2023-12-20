@@ -51,7 +51,7 @@ exports.getAllJob = async (name, salary_from, salary_to, distance_from, distance
     }
     let result = await job(DB_CONNECTION).findAll({
         attributes: [
-            ['id', 'jod_id'],
+            ['id', 'job_id'],
             ['name', 'job_name'],
             [Sequelize.col('company.distance'), 'distance'],
             'work_location', 'skill_requirements', 'salary'
@@ -78,7 +78,7 @@ exports.getJobById = async (id) => {
             id: id
         },
         attributes: [
-            ['id', 'jod_id'],
+            ['id', 'job_id'],
             ['name', 'job_name'],
             [Sequelize.col('company.distance'), 'distance'],
             'work_location', 'skill_requirements', 'salary', 'type', 'description'
