@@ -3,4 +3,5 @@ module.exports = {
     company: require('./company'),
     user: require('./user'),
     apply_job: require('./apply_job'),
+    notify: require('./notification'),
 }

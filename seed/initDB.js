@@ -14,6 +14,12 @@ const initModels = (db, models) => {
 
     db.models.apply_job.belongsTo(db.models.user, {foreignKey: 'user_id'})
     db.models.user.hasMany(db.models.apply_job, {foreignKey: 'user_id'})
+
+    db.models.notify.belongsTo(db.models.user, {foreignKey: 'user_id'})
+    db.models.user.hasOne(db.models.notify, {foreignKey: 'user_id'})
+
+    db.models.notify.belongsTo(db.models.company, {foreignKey: 'company_id'})
+    db.models.company.hasMany(db.models.notify, {foreignKey: 'company_id'})
 }
 
 const initDB = async () => {
