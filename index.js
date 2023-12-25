@@ -22,6 +22,8 @@ app.use(bodyParser.json({ limit: '50mb' }));
 router.use("/api/v1", require('./modules/job/route'));
 router.use("/api/v1", require('./modules/auth/route'));
 router.use("/api/v1", require('./modules/user/route'));
+router.use("/api/v1", require('./modules/notification/route'));
+router.use("/api/v1", require('./modules/company/route'));
 
 
 app.use(router);
