@@ -1,10 +1,10 @@
 const service = require("./service");
 
-exports.getUserCv = async (req, res) => {
+exports.getNotification = async (req, res) => {
 	try {
 		const user_id = req.user.id;
-		const user_cv = await service.getUserCv(user_id);
-		res.status(200).json(user_cv)
+		let result = await service.getNotification(user_id);
+		res.status(200).json(result)
 	} catch (err) {
 		console.log('error', err)
 		res.status(400).json({

@@ -3,6 +3,6 @@ const router = express.Router();
 const controller = require('./controller');
 const { auth } = require('../../middleware')
 
-router.get('/user/cv', auth, controller.getUserCv);
+router.get('/notification', auth, controller.getNotification);
 
 module.exports = router;
