@@ -22,22 +22,3 @@ exports.getCompanyInformation = async (req, res) => {
 		})
 	}
 };
-
-exports.checkApplied = async (req, res) => {
-	try {
-		const user_id = req.user.id;
-		let { company_id } = req.params;
-		company_id = toInt(company_id);
-
-		let result = await service.checkApplied(user_id, company_id);
-		res.status(200).json({
-			applied: result
-		})
-	} catch (err) {
-		console.log('error', err)
-		res.status(400).json({
-			message: 'Something went wrong!',
-			content: err.messages
-		})
-	}
-}
