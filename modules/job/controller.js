@@ -77,3 +77,22 @@ exports.applyJob = async (req, res) => {
         })
     }
 }
+
+exports.checkApplied = async (req, res) => {
+	try {
+		const user_id = req.user.id;
+		let { job_id } = req.params;
+		job_id = toInt(job_id);
+
+		let result = await service.checkApplied(user_id, job_id);
+		res.status(200).json({
+			applied: result
+		})
+	} catch (err) {
+		console.log('error', err)
+		res.status(400).json({
+			message: 'Something went wrong!',
+			content: err.messages
+		})
+	}
+}

@@ -131,3 +131,23 @@ exports.applyJob = async (job_id, user_id, name, use_current_cv, intro_letter, f
     });
     return true;
 }
+
+/**
+ * Kiểm tra user đã dăng ký ứng tuyển vào job hay chưa
+ * @param {int} user_id 
+ * @param {int} job_id 
+ * @returns {boolean}
+ */
+exports.checkApplied = async (user_id, job_id) => {
+    let result = await apply_job(DB_CONNECTION).findOne({
+        where: {
+            user_id: user_id,
+            job_id: job_id
+        },
+        attributes: ['id'],
+    });
+    if (result === null) {
+        return false;
+    }
+    return true;
+}
