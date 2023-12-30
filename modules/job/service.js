@@ -69,9 +69,10 @@ exports.getAllJob = async (name, salary_from, salary_to, distance_from, distance
 
 /**
  * Lấy thông tin chi tiết 1 công việc theo id
- * @param {*} id 
+ * @param {int} id 
+ * @param {int} user_id
  */
-exports.getJobById = async (id) => {
+exports.getJobById = async (id, user_id) => {
     id = toInt(id)
     let result = await job(DB_CONNECTION).findOne({
         where: {
@@ -81,7 +82,16 @@ exports.getJobById = async (id) => {
             ['id', 'job_id'],
             ['name', 'job_name'],
             [Sequelize.col('company.distance'), 'distance'],
-            'work_location', 'skill_requirements', 'salary', 'type', 'description'
+            'work_location', 'skill_requirements', 'salary', 'type', 'description',
+            [Sequelize.literal(`(
+                EXISTS(
+                    SELECT user_id FROM apply_job AS apply_job
+                    WHERE
+                        apply_job.user_id = ${user_id}
+                        AND
+                        apply_job.job_id = ${id}
+                )
+            )`), 'is_applied']
         ],
         include: [
             {
