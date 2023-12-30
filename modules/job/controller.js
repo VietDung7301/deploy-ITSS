@@ -24,9 +24,10 @@ exports.getJobList = async(req, res) => {
 
 exports.getJobById = async(req, res) => {
     try {
-        const { job_id } = req.params
+        const { job_id } = req.params;
+        const user_id = req.user.id;
 
-        const result = await service.getJobById(job_id)
+        const result = await service.getJobById(job_id, user_id)
         if (result === null) {
             return res.status(400).json({
                 message: 'No job found with this id'
